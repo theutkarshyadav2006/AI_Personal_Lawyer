@@ -1,0 +1,24 @@
+# Sensitive
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Database (do not commit — Railway will create fresh)
+database/*.db
+
+# Uploaded files
+uploads/
+
+# Session files
+flask_session/
+
+# Virtual environment
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/

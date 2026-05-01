@@ -1,0 +1,206 @@
+{% extends "base.html" %}
+
+{% block title %}Indian Laws & IPC - Legal Ecosystem{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h2 class="brand-font text-gold mb-3">Indian Penal Code & Laws</h2>
+        <p class="text-muted mx-auto" style="max-width: 600px;">A comprehensive directory of important Indian laws, sections, and their descriptions. Filter by category to find relevant statutes.</p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="d-flex justify-content-center flex-wrap gap-2 mb-5" id="lawFilters">
+        <button class="btn btn-gold-solid" onclick="filterLaws('all')">All Laws</button>
+        <button class="btn btn-outline-warning" onclick="filterLaws('ipc')">IPC Sections</button>
+        <button class="btn btn-outline-warning" onclick="filterLaws('cyber')">Cyber/IT Act</button>
+        <button class="btn btn-outline-warning" onclick="filterLaws('property')">Property Law</button>
+        <button class="btn btn-outline-warning" onclick="filterLaws('family')">Family Law</button>
+    </div>
+
+    <div class="row g-4" id="lawsGrid">
+        <!-- Law 1 -->
+        <div class="col-md-4 law-card" data-category="ipc">
+            <div class="card bg-dark p-4 h-100 border-secondary">
+                <span class="badge bg-danger mb-2" style="width: fit-content;">IPC</span>
+                <h4 class="text-warning">Section 420 IPC</h4>
+                <p class="text-muted mt-2 mb-3">Cheating and dishonestly inducing delivery of property.</p>
+                <button class="btn btn-outline-warning btn-sm mt-auto w-100" data-bs-toggle="modal" data-bs-target="#modalLaw420">Read Full Section</button>
+            </div>
+        </div>
+        
+        <!-- Law 2 -->
+        <div class="col-md-4 law-card" data-category="ipc">
+            <div class="card bg-dark p-4 h-100 border-secondary">
+                <span class="badge bg-danger mb-2" style="width: fit-content;">IPC</span>
+                <h4 class="text-warning">Section 378 IPC</h4>
+                <p class="text-muted mt-2 mb-3">Definition of Theft and its implications.</p>
+                <button class="btn btn-outline-warning btn-sm mt-auto w-100" data-bs-toggle="modal" data-bs-target="#modalLaw378">Read Full Section</button>
+            </div>
+        </div>
+        
+        <!-- Law 3 -->
+        <div class="col-md-4 law-card" data-category="cyber">
+            <div class="card bg-dark p-4 h-100 border-secondary">
+                <span class="badge bg-info text-dark mb-2" style="width: fit-content;">IT Act</span>
+                <h4 class="text-warning">Section 66 IT Act</h4>
+                <p class="text-muted mt-2 mb-3">Computer related offences (Hacking, data theft).</p>
+                <button class="btn btn-outline-warning btn-sm mt-auto w-100" data-bs-toggle="modal" data-bs-target="#modalLaw66">Read Full Section</button>
+            </div>
+        </div>
+        
+        <!-- Law 4 -->
+        <div class="col-md-4 law-card" data-category="cyber">
+            <div class="card bg-dark p-4 h-100 border-secondary">
+                <span class="badge bg-info text-dark mb-2" style="width: fit-content;">IT Act</span>
+                <h4 class="text-warning">Section 66E IT Act</h4>
+                <p class="text-muted mt-2 mb-3">Punishment for violation of privacy (capturing/publishing private images).</p>
+                <button class="btn btn-outline-warning btn-sm mt-auto w-100" data-bs-toggle="modal" data-bs-target="#modalLaw66E">Read Full Section</button>
+            </div>
+        </div>
+
+        <!-- Law 5 -->
+        <div class="col-md-4 law-card" data-category="property">
+            <div class="card bg-dark p-4 h-100 border-secondary">
+                <span class="badge bg-success mb-2" style="width: fit-content;">Property</span>
+                <h4 class="text-warning">Transfer of Property Act</h4>
+                <p class="text-muted mt-2 mb-3">Section 54: Sale defined. How sale is made.</p>
+                <button class="btn btn-outline-warning btn-sm mt-auto w-100" data-bs-toggle="modal" data-bs-target="#modalLaw54">Read Full Section</button>
+            </div>
+        </div>
+
+        <!-- Law 6 -->
+        <div class="col-md-4 law-card" data-category="family">
+            <div class="card bg-dark p-4 h-100 border-secondary">
+                <span class="badge bg-primary mb-2" style="width: fit-content;">Family</span>
+                <h4 class="text-warning">Section 13 HMA</h4>
+                <p class="text-muted mt-2 mb-3">Hindu Marriage Act: Grounds for Divorce.</p>
+                <button class="btn btn-outline-warning btn-sm mt-auto w-100" data-bs-toggle="modal" data-bs-target="#modalLaw13">Read Full Section</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<!-- IPC 420 Modal -->
+<div class="modal fade" id="modalLaw420" tabindex="-1">
+  <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-content bg-dark border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">Section 420 IPC</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-white">
+        <p class="text-muted"><strong>Cheating and dishonestly inducing delivery of property:</strong></p>
+        <p class="text-muted">Whoever cheats and thereby dishonestly induces the person deceived to deliver any property to any person, or to make, alter or destroy the whole or any part of a valuable security, or anything which is signed or sealed, and which is capable of being converted into a valuable security, shall be punished with imprisonment of either description for a term which may extend to seven years, and shall also be liable to fine.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IPC 378 Modal -->
+<div class="modal fade" id="modalLaw378" tabindex="-1">
+  <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-content bg-dark border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">Section 378 IPC</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-white">
+        <p class="text-muted"><strong>Theft:</strong></p>
+        <p class="text-muted">Whoever, intending to take dishonestly any moveable property out of the possession of any person without that person's consent, moves that property in order to such taking, is said to commit theft. Punishment under Section 379 can be up to 3 years imprisonment, or fine, or both.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IT Act 66 Modal -->
+<div class="modal fade" id="modalLaw66" tabindex="-1">
+  <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-content bg-dark border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">Section 66 IT Act, 2000</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-white">
+        <p class="text-muted"><strong>Computer Related Offences:</strong></p>
+        <p class="text-muted">If any person, dishonestly or fraudulently, does any act referred to in section 43 (damage to computer, computer system, etc.), he shall be punishable with imprisonment for a term which may extend to three years or with fine which may extend to five lakh rupees or with both.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- IT Act 66E Modal -->
+<div class="modal fade" id="modalLaw66E" tabindex="-1">
+  <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-content bg-dark border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">Section 66E IT Act, 2000</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-white">
+        <p class="text-muted"><strong>Punishment for violation of privacy:</strong></p>
+        <p class="text-muted">Whoever, intentionally or knowingly captures, publishes or transmits the image of a private area of any person without his or her consent, under circumstances violating the privacy of that person, shall be punished with imprisonment which may extend to three years or with fine not exceeding two lakh rupees, or with both.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Property 54 Modal -->
+<div class="modal fade" id="modalLaw54" tabindex="-1">
+  <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-content bg-dark border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">Section 54 TPA, 1882</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-white">
+        <p class="text-muted"><strong>"Sale" defined:</strong></p>
+        <p class="text-muted">"Sale" is a transfer of ownership in exchange for a price paid or promised or part-paid and part-promised.<br><br>Such transfer, in the case of tangible immovable property of the value of one hundred rupees and upwards, or in the case of a reversion or other intangible thing, can be made only by a registered instrument.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Family 13 Modal -->
+<div class="modal fade" id="modalLaw13" tabindex="-1">
+  <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-content bg-dark border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">Section 13 Hindu Marriage Act</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-white">
+        <p class="text-muted"><strong>Divorce:</strong></p>
+        <p class="text-muted">Any marriage solemnized, whether before or after the commencement of this Act, may, on a petition presented by either the husband or the wife, be dissolved by a decree of divorce on the ground that the other party has committed adultery, treated the petitioner with cruelty, deserted the petitioner for a continuous period of not less than two years, etc.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function filterLaws(category) {
+        // Update button styles
+        const buttons = document.querySelectorAll('#lawFilters .btn');
+        buttons.forEach(btn => {
+            btn.classList.remove('btn-gold-solid');
+            btn.classList.add('btn-outline-warning');
+        });
+        
+        // Find clicked button and highlight
+        const clickedBtn = event.currentTarget;
+        clickedBtn.classList.remove('btn-outline-warning');
+        clickedBtn.classList.add('btn-gold-solid');
+        
+        // Filter cards
+        const cards = document.querySelectorAll('.law-card');
+        cards.forEach(card => {
+            if(category === 'all' || card.getAttribute('data-category') === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
+{% endblock %}

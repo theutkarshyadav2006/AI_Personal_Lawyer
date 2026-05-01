@@ -1,0 +1,17 @@
+flask
+langchain
+langchain-groq
+python-dotenv
+Flask-SQLAlchemy
+Flask-Login
+Werkzeug
+python-dateutil
+Flask-Session
+fpdf2
+Flask-SocketIO
+pdfplumber
+Pillow
+requests
+gunicorn
+gevent
+gevent-websocket

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Find Lawyers - AI Legal Ecosystem{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="brand-font text-white"><i class="bi bi-people text-warning"></i> Verified Lawyers Marketplace</h2>
+        <div class="input-group w-25">
+            <input type="text" class="form-control bg-dark text-white border-secondary" placeholder="Search by specialty...">
+            <button class="btn btn-gold-solid"><i class="bi bi-search"></i></button>
+        </div>
+    </div>
+    
+    <div class="row g-4">
+        {% if lawyers %}
+            {% for profile in lawyers %}
+            <div class="col-md-4">
+                <div class="card p-4 h-100 bg-dark">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-secondary d-flex justify-content-center align-items-center" style="width: 60px; height: 60px;">
+                            <i class="bi bi-person text-white fs-2"></i>
+                        </div>
+                        <div class="ms-3">
+                            <h5 class="text-white mb-0">{{ profile.user.name }}</h5>
+                            <small class="text-warning"><i class="bi bi-star-fill"></i> {{ profile.rating }} ({{ profile.experience_years }} yrs exp)</small>
+                        </div>
+                    </div>
+                    <p class="text-muted small">{{ profile.bio }}</p>
+                    <p class="text-info small mb-3"><i class="bi bi-briefcase text-info"></i> {{ profile.specialization }}</p>
+                    <a href="{{ url_for('main.request_consultation', lawyer_user_id=profile.user_id) }}" class="btn btn-outline-warning w-100 mt-auto">Request Consultation</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12 text-center text-muted py-5">
+                <i class="bi bi-people fs-1"></i>
+                <p>No verified lawyers available at the moment.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

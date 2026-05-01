@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Useful Contacts - AI Legal Ecosystem{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="brand-font text-white mb-4"><i class="bi bi-telephone text-warning"></i> Useful Legal & Emergency Contacts</h2>
+    
+    <div class="row g-4">
+        <!-- Emergency -->
+        <div class="col-md-4">
+            <div class="card bg-dark p-4 text-center border-secondary h-100">
+                <div class="rounded-circle bg-danger mx-auto d-flex justify-content-center align-items-center mb-3" style="width: 70px; height: 70px;">
+                    <i class="bi bi-shield-exclamation text-white fs-1"></i>
+                </div>
+                <h4 class="text-white">National Emergency</h4>
+                <h2 class="text-danger fw-bold">112</h2>
+                <p class="text-muted small">Pan-India single emergency number for Police, Fire, and Medical.</p>
+            </div>
+        </div>
+        
+        <!-- Women Helpline -->
+        <div class="col-md-4">
+            <div class="card bg-dark p-4 text-center border-secondary h-100">
+                <div class="rounded-circle bg-info mx-auto d-flex justify-content-center align-items-center mb-3" style="width: 70px; height: 70px;">
+                    <i class="bi bi-person-heart text-white fs-1"></i>
+                </div>
+                <h4 class="text-white">Women Helpline</h4>
+                <h2 class="text-info fw-bold">1091</h2>
+                <p class="text-muted small">Dedicated 24/7 helpline for women in distress (Domestic Violence). </p>
+            </div>
+        </div>
+        
+        <!-- Cyber Crime -->
+        <div class="col-md-4">
+            <div class="card bg-dark p-4 text-center border-secondary h-100">
+                <div class="rounded-circle bg-warning mx-auto d-flex justify-content-center align-items-center mb-3" style="width: 70px; height: 70px;">
+                    <i class="bi bi-laptop text-dark fs-1"></i>
+                </div>
+                <h4 class="text-white">Cyber Crime</h4>
+                <h2 class="text-warning fw-bold">1930</h2>
+                <p class="text-muted small">National Cyber Crime Reporting Portal helpline for financial fraud.</p>
+            </div>
+        </div>
+        
+        <!-- Legal Services -->
+        <div class="col-md-6 mt-4">
+            <div class="card bg-dark p-4 border-secondary">
+                <h5 class="text-warning border-bottom border-secondary pb-2"><i class="bi bi-bank"></i> Free Legal Aid (NALSA)</h5>
+                <p class="text-white mt-2 mb-1"><strong>Helpline:</strong> 15100</p>
+                <p class="text-muted small">National Legal Services Authority provides free legal services to eligible persons, including organizing Lok Adalats.</p>
+            </div>
+        </div>
+        
+        <!-- Anti-Corruption -->
+        <div class="col-md-6 mt-4">
+            <div class="card bg-dark p-4 border-secondary">
+                <h5 class="text-warning border-bottom border-secondary pb-2"><i class="bi bi-eye"></i> Anti-Corruption Bureau</h5>
+                <p class="text-white mt-2 mb-1"><strong>Helpline:</strong> 1064</p>
+                <p class="text-muted small">Report bribery or corruption by any government official or public servant.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

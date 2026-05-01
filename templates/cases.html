@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Cases - AI Legal Ecosystem{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="brand-font text-white mb-0"><i class="bi bi-folder2-open text-warning"></i> Public Case Repository</h2>
+        <div>
+            <a href="/laws" class="btn btn-outline-info me-2"><i class="bi bi-book"></i> Browse Indian Laws</a>
+        </div>
+    </div>
+    
+    <div class="card bg-dark border-secondary">
+        <div class="card-body p-0">
+            <table class="table table-dark table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th class="ps-4">Case ID</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th class="pe-4 text-end">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if cases %}
+                        {% for case in cases %}
+                        <tr>
+                            <td class="ps-4">#CASE-{{ case.id }}</td>
+                            <td>{{ case.category }}</td>
+                            <td class="text-muted">{{ case.title }}</td>
+                            <td>
+                                {% if case.status == 'Pending Analysis' %}
+                                    <span class="badge bg-secondary text-light">Pending Analysis</span>
+                                {% elif case.status == 'In Progress' %}
+                                    <span class="badge bg-warning text-dark">In Progress</span>
+                                {% elif case.status == 'Resolved' %}
+                                    <span class="badge bg-success text-light">Resolved</span>
+                                {% else %}
+                                    <span class="badge bg-info text-dark">{{ case.status }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="pe-4 text-end">
+                                <a href="{{ url_for('main.case_detail', case_id=case.id) }}" class="btn btn-sm btn-outline-light">View</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center text-muted py-4">No active cases found.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

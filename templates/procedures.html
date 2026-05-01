@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block title %}Legal Procedures - AI Legal Ecosystem{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="brand-font text-white mb-4"><i class="bi bi-journal-check text-warning"></i> Legal Procedures & Guides</h2>
+    
+    <div class="row g-4">
+        <!-- Guide 1 -->
+        <div class="col-md-4">
+            <div class="card bg-dark p-4 h-100 border-secondary">
+                <h4 class="text-warning">Character Certificate</h4>
+                <p class="text-muted mt-2 mb-3">Official document by police stating the individual has no criminal records.</p>
+                <button class="btn btn-outline-warning btn-sm mt-auto w-100" data-bs-toggle="modal" data-bs-target="#modalCharacter">Read Full Guide</button>
+            </div>
+        </div>
+        
+        <!-- Guide 2 -->
+        <div class="col-md-4">
+            <div class="card bg-dark p-4 h-100 border-secondary">
+                <h4 class="text-warning">Driving License</h4>
+                <p class="text-muted mt-2 mb-3">Issued by RTO. Requires obtaining a Learner's License first.</p>
+                <button class="btn btn-outline-warning btn-sm mt-auto w-100" data-bs-toggle="modal" data-bs-target="#modalDriving">Read Full Guide</button>
+            </div>
+        </div>
+        
+        <!-- Guide 3 -->
+        <div class="col-md-4">
+            <div class="card bg-dark p-4 h-100 border-secondary">
+                <h4 class="text-warning">Filing an e-FIR</h4>
+                <p class="text-muted mt-2 mb-3">File a First Information Report online for non-heinous crimes like theft.</p>
+                <button class="btn btn-outline-warning btn-sm mt-auto w-100" data-bs-toggle="modal" data-bs-target="#modalFIR">Read Full Guide</button>
+            </div>
+        </div>
+        
+        <!-- Guide 4 -->
+        <div class="col-md-4">
+            <div class="card bg-dark p-4 h-100 border-secondary">
+                <h4 class="text-warning">Gun / Arms License</h4>
+                <p class="text-muted mt-2 mb-3">Learn the strict legal process to acquire an arms license for self-defense.</p>
+                <button class="btn btn-outline-warning btn-sm mt-auto w-100" data-bs-toggle="modal" data-bs-target="#modalGun">Read Full Guide</button>
+            </div>
+        </div>
+
+        <!-- Guide 5 -->
+        <div class="col-md-4">
+            <div class="card bg-dark p-4 h-100 border-secondary">
+                <h4 class="text-warning">Voter ID (EPIC)</h4>
+                <p class="text-muted mt-2 mb-3">How to register as a new voter and obtain your Election Photo Identity Card.</p>
+                <button class="btn btn-outline-warning btn-sm mt-auto w-100" data-bs-toggle="modal" data-bs-target="#modalVoter">Read Full Guide</button>
+            </div>
+        </div>
+
+        <!-- Guide 6 -->
+        <div class="col-md-4">
+            <div class="card bg-dark p-4 h-100 border-secondary">
+                <h4 class="text-warning">Passport Application</h4>
+                <p class="text-muted mt-2 mb-3">The complete procedure for applying, police verification, and dispatch.</p>
+                <button class="btn btn-outline-warning btn-sm mt-auto w-100" data-bs-toggle="modal" data-bs-target="#modalPassport">Read Full Guide</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<!-- Character Certificate Modal -->
+<div class="modal fade" id="modalCharacter" tabindex="-1">
+  <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-content bg-dark border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">Character Certificate Process</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-white">
+        <ol class="text-muted">
+            <li>Visit the official State Police Citizen Portal (e.g., UP Police CCTNS, Delhi Police).</li>
+            <li>Register an account using your Aadhar/Phone Number.</li>
+            <li>Navigate to the "Character Certificate" section and fill out the form.</li>
+            <li>Upload documents: Passport-size photo, Aadhar Card, Address Proof.</li>
+            <li>Pay the requisite processing fee (usually ₹50-₹250).</li>
+            <li>A physical police verification will happen at your address.</li>
+            <li>Download the certificate from the portal once approved.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Driving License Modal -->
+<div class="modal fade" id="modalDriving" tabindex="-1">
+  <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-content bg-dark border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">Driving License Process</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-white">
+        <ol class="text-muted">
+            <li>Visit the Parivahan Sewa website (parivahan.gov.in).</li>
+            <li>Select "Online Services" > "Driving License Related Services".</li>
+            <li>Select your state and apply for a "Learner's License".</li>
+            <li>Fill the form, upload Age & Address proofs, and submit the Medical Certificate (Form 1A).</li>
+            <li>Book a slot and clear the online/RTO computer test.</li>
+            <li>After 30 days of getting the Learner's License, apply for a "Permanent Driving License".</li>
+            <li>Book a driving test slot, pass the test at the RTO track, and the license will be dispatched via post.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- e-FIR Modal -->
+<div class="modal fade" id="modalFIR" tabindex="-1">
+  <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-content bg-dark border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">Filing an e-FIR</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-white">
+        <p class="text-muted">E-FIRs are strictly for non-heinous cases like mobile theft, lost documents, or cyber fraud. For severe crimes, visit the station.</p>
+        <ol class="text-muted">
+            <li>Go to the state police website or National Cyber Crime portal (for cyber frauds).</li>
+            <li>Login with mobile OTP.</li>
+            <li>Select the incident category (e.g., Lost Article, Cyber Fraud).</li>
+            <li>Enter the details of the incident (Date, Time, Description).</li>
+            <li>Submit the form and download the digitally signed FIR copy instantly.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Gun License Modal -->
+<div class="modal fade" id="modalGun" tabindex="-1">
+  <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-content bg-dark border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">Arms/Gun License Process</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-white">
+        <ol class="text-muted">
+            <li>Apply under the Arms Act, 1959 via NDAL (National Database of Arms Licenses) or NDAL-ALIS portal.</li>
+            <li>Submit Form A-1 detailing the genuine need for self-defense (e.g., imminent threat).</li>
+            <li>Attach Medical Certificate, Proof of Age/Address, and Police Clearance.</li>
+            <li>Undergo a thorough background check and interview by the DCP/DM.</li>
+            <li>Complete the mandatory arms handling training course.</li>
+            <li>If approved by the Licensing Authority, purchase the weapon from an authorized dealer within the stipulated time.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Voter ID Modal -->
+<div class="modal fade" id="modalVoter" tabindex="-1">
+  <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-content bg-dark border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">Voter ID Registration</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-white">
+        <ol class="text-muted">
+            <li>Visit the NVSP (National Voter's Service Portal) or download the Voter Helpline App.</li>
+            <li>Select "Form 6" for registration of new voters.</li>
+            <li>Fill in your personal details, family details, and address.</li>
+            <li>Upload a recent passport-size photograph, Address Proof, and Age Proof (Aadhar/10th Marksheet).</li>
+            <li>Submit the form to generate a Reference ID.</li>
+            <li>A BLO (Booth Level Officer) will verify your residence. The EPIC will be delivered via Speed Post.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Passport Modal -->
+<div class="modal fade" id="modalPassport" tabindex="-1">
+  <div class="modal-dialog modal-lg bg-dark">
+    <div class="modal-content bg-dark border-secondary">
+      <div class="modal-header border-secondary">
+        <h5 class="modal-title text-warning">Passport Application Process</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body text-white">
+        <ol class="text-muted">
+            <li>Register on the Passport Seva Online Portal (passportindia.gov.in).</li>
+            <li>Click "Apply for Fresh Passport/Re-issue of Passport" and fill out the online form.</li>
+            <li>Pay the fee and book an appointment at the nearest Passport Seva Kendra (PSK).</li>
+            <li>Visit the PSK with original documents (Aadhar, PAN, 10th Marksheet for ECNR) at the scheduled time.</li>
+            <li>Provide biometrics and photographs at the center.</li>
+            <li>Undergo Police Verification at your local station.</li>
+            <li>Once cleared, the passport will be printed and dispatched.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}AI Legal Ecosystem - Intelligence Meets Real Lawyers{% endblock %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <!-- Hero Section -->
+    <div class="hero-section text-center py-5" style="min-height: 80vh; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;">
+        <!-- Subtle Gold Glow Background -->
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, rgba(11,11,15,0) 70%); z-index: -1;"></div>
+        
+        <div class="container position-relative z-1">
+            <h1 class="brand-font display-3 fw-bold mb-4" style="text-shadow: 0 4px 20px rgba(212,175,55,0.3);">
+                AI Legal Intelligence<br>
+                <span style="color: var(--gold-accent);">Meets Real Lawyers</span>
+            </h1>
+            <p class="lead text-muted mx-auto mb-5" style="max-width: 600px;">
+                Experience the future of legal consultation. Our advanced AI analyzes your case, identifies risks, and connects you seamlessly with expert human attorneys.
+            </p>
+            <div class="d-flex justify-content-center gap-4">
+                <a href="{{ url_for('main.chatbot') }}" class="btn btn-gold-solid btn-lg">Ask AI Assistant</a>
+                <a href="#" class="btn btn-gold btn-lg">Browse Lawyers</a>
+            </div>
+            
+            <!-- Feature Highlights -->
+            <div class="row mt-5 pt-5 text-start">
+                <div class="col-md-4 mb-4">
+                    <div class="card p-4 h-100 bg-transparent border-0" style="border-left: 1px solid var(--glass-border) !important;">
+                        <i class="bi bi-robot fs-1 text-warning mb-3"></i>
+                        <h4 class="brand-font">Instant AI Analysis</h4>
+                        <p class="text-muted small">Upload evidence or explain your situation. Our AI instantly extracts key entities and summarizes legal risks.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card p-4 h-100 bg-transparent border-0" style="border-left: 1px solid var(--glass-border) !important;">
+                        <i class="bi bi-file-earmark-check fs-1 text-warning mb-3"></i>
+                        <h4 class="brand-font">Property Verification</h4>
+                        <p class="text-muted small">Simulate registry checks and verify property documents against our extensive database to detect fraud.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card p-4 h-100 bg-transparent border-0" style="border-left: 1px solid var(--glass-border) !important;">
+                        <i class="bi bi-person-badge fs-1 text-warning mb-3"></i>
+                        <h4 class="brand-font">Verified Lawyers</h4>
+                        <p class="text-muted small">Easily escalate complex AI cases directly to verified lawyers on our exclusive marketplace.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

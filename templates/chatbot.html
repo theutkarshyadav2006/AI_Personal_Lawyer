@@ -1,0 +1,334 @@
+{% extends "base.html" %}
+
+{% block title %}AI Chat Interface - Legal Ecosystem{% endblock %}
+
+{% block content %}
+<div class="container-fluid d-flex justify-content-center h-100" style="padding-bottom: 20px;">
+    <div class="col-md-10 col-lg-8 d-flex flex-column" style="height: calc(100vh - 120px);">
+        
+        <!-- Header Actions -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h4 class="brand-font mb-0"><i class="bi bi-robot text-warning me-2"></i> AI Legal Assistant</h4>
+            <div>
+                <label class="btn btn-sm btn-outline-warning me-2 mb-0" style="cursor: pointer;" id="uploadLabel">
+                    <i class="bi bi-upload"></i> <span id="uploadLabelText">Upload & Analyze</span>
+                    <input type="file" name="document" class="d-none" id="docFileInput" accept=".pdf,.txt,.png,.jpg,.jpeg">
+                </label>
+                <a href="/lawyers" class="btn btn-sm btn-gold-solid me-2"><i class="bi bi-arrow-up-right"></i> Escalate to Lawyer</a>
+                <a href="/clear_chat" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Clear</a>
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="surface-panel flex-grow-1 overflow-auto p-4 mb-4" id="chatContainer" style="background: rgba(20,20,26,0.9) !important;">
+            {% if session.chat_history and session.chat_history|length > 0 %}
+                {% for msg in session.chat_history %}
+                    {% if msg.role == 'user' %}
+                        <div class="chat-bubble chat-user shadow-sm">
+                            <p class="mb-0 text-white">{{ msg.content }}</p>
+                        </div>
+                    {% else %}
+                        <div class="chat-bubble chat-ai shadow-sm">
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="bi bi-scales text-warning me-2"></i>
+                                <span class="fw-bold text-warning small">AI Legal Assistant</span>
+                            </div>
+                            
+                            <!-- Main Answer -->
+                            <div style="white-space: pre-wrap; font-size: 1em; color: var(--text-main);" class="mb-3">{{ msg.content.answer if msg.content.answer else msg.content }}</div>
+                            
+                            <!-- Analysis Details -->
+                            {% if msg.content.analysis %}
+                                <div class="p-3 mb-3 rounded shadow-sm" style="background: rgba(212,175,55,0.05); border-left: 4px solid var(--gold-accent);">
+                                    
+                                    <!-- Document Type & Urgency badges -->
+                                    <div class="d-flex gap-2 mb-3">
+                                        {% if msg.content.analysis.document_type %}
+                                        <span class="badge" style="background: rgba(99,102,241,0.2); color: #a5b4fc; border: 1px solid rgba(99,102,241,0.4);">
+                                            <i class="bi bi-file-earmark-text me-1"></i>{{ msg.content.analysis.document_type }}
+                                        </span>
+                                        {% endif %}
+                                        {% if msg.content.analysis.urgency %}
+                                        <span class="badge {% if 'High' in msg.content.analysis.urgency %}bg-danger{% elif 'Medium' in msg.content.analysis.urgency %}bg-warning text-dark{% else %}bg-success{% endif %}">
+                                            <i class="bi bi-clock me-1"></i>Urgency: {{ msg.content.analysis.urgency.split('—')[0].strip() }}
+                                        </span>
+                                        {% endif %}
+                                    </div>
+
+                                    <h6 class="text-gold mb-2"><i class="bi bi-file-text me-2"></i> Document Summary</h6>
+                                    <p class="small text-white mb-3" style="line-height: 1.7;">{{ msg.content.analysis.summary }}</p>
+                                    
+                                    {% if msg.content.analysis.key_issues %}
+                                    <h6 class="mb-2 small fw-bold" style="color: #f59e0b;">⚖️ Key Legal Issues:</h6>
+                                    <ul class="small text-muted ps-3 mb-3">
+                                        {% for issue in msg.content.analysis.key_issues %}
+                                            <li class="mb-1">{{ issue }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    {% endif %}
+
+                                    {% if msg.content.analysis.rights %}
+                                    <div class="p-2 mb-3 rounded" style="background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.2);">
+                                        <h6 class="mb-1 small fw-bold" style="color: #4ade80;">🛡️ Your Legal Rights:</h6>
+                                        <p class="small text-muted mb-0">{{ msg.content.analysis.rights }}</p>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if msg.content.analysis.potential_outcome %}
+                                    <h6 class="mb-2 small fw-bold" style="color: #f59e0b;">📊 Potential Outcome:</h6>
+                                    <p class="small text-muted mb-3">{{ msg.content.analysis.potential_outcome }}</p>
+                                    {% endif %}
+
+                                    {% if msg.content.analysis.recommended_steps %}
+                                    <h6 class="mb-2 small fw-bold" style="color: #f59e0b;">🗂️ Recommended Steps:</h6>
+                                    <ol class="small text-muted ps-3 mb-0">
+                                        {% for step in msg.content.analysis.recommended_steps %}
+                                            <li class="mb-1">{{ step }}</li>
+                                        {% endfor %}
+                                    </ol>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Relevant Sections -->
+                            {% if msg.content.relevant_sections and msg.content.relevant_sections|length > 0 %}
+                                <div class="mb-3 pt-2 border-top" style="border-color: rgba(212, 175, 55, 0.2) !important;">
+                                    <p class="mb-2 fw-bold small text-muted"><i class="bi bi-journal-bookmark text-warning"></i> Applicable Statutes:</p>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        {% for section in msg.content.relevant_sections %}
+                                            <span class="badge" style="background: rgba(212,175,55,0.15); color: #D4AF37; border: 1px solid rgba(212,175,55,0.3);">
+                                                {{ section.law if section is mapping else section }}
+                                            </span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                            
+                            <!-- Disclaimer -->
+                            {% if msg.content.disclaimer %}
+                                <div class="small text-muted mt-2 pt-2 border-top" style="font-size: 0.8em; border-color: rgba(255,255,255,0.05) !important;">
+                                    <i class="bi bi-info-circle me-1"></i> {{ msg.content.disclaimer }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <div class="h-100 d-flex flex-column align-items-center justify-content-center text-center">
+                    <i class="bi bi-chat-square-text text-warning opacity-50 mb-3" style="font-size: 3rem;"></i>
+                    <h3 class="brand-font text-white mb-2">How can I assist you today?</h3>
+                    <p class="text-muted" style="max-width: 400px;">Describe your legal issue, ask about specific laws, or upload a document for analysis.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Input Area -->
+        <form method="POST" class="position-relative" id="chatForm">
+            <!-- Language Selector for Voice -->
+            <select id="voiceLang" class="form-select form-select-sm bg-dark text-warning border-secondary position-absolute" 
+                    style="left: 15px; top: -35px; width: auto; font-size: 0.8rem; z-index: 10;">
+                <option value="en-IN">English (India)</option>
+                <option value="hi-IN">Hindi (हिंदी)</option>
+            </select>
+            
+            <input type="text" class="form-control form-control-lg bg-dark text-white rounded-pill pe-5" 
+                   name="question" id="chatInput" placeholder="Type or speak your legal inquiry here..." 
+                   style="border: 1px solid var(--glass-border); box-shadow: 0 4px 20px rgba(0,0,0,0.5);" autocomplete="off">
+            <button type="button" class="btn btn-outline-danger rounded-circle position-absolute" id="stopAudioBtn"
+                    style="right: 94px; top: 6px; width: 40px; height: 40px; padding: 0; display: none; align-items: center; justify-content: center; border: none;" title="Stop Speaking">
+                <i class="bi bi-stop-circle-fill"></i>
+            </button>
+            <button type="button" class="btn btn-outline-warning rounded-circle position-absolute" id="micBtn"
+                    style="right: 50px; top: 6px; width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; border: none;" title="Start Speaking">
+                <i class="bi bi-mic-fill"></i>
+            </button>
+            <button type="submit" class="btn btn-gold-solid rounded-circle position-absolute" 
+                    style="right: 6px; top: 6px; width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-send-fill"></i>
+            </button>
+        </form>
+
+        <!-- Hidden upload loading bubble (injected into chat) -->
+        <div id="uploadLoadingBubble" style="display:none;" class="chat-bubble chat-user shadow-sm">
+            <p class="mb-0 text-white"><i class="bi bi-file-earmark-text me-2"></i><span id="uploadingFileName">Uploading...</span></p>
+        </div>
+        <div id="analysisLoadingBubble" style="display:none;" class="chat-bubble chat-ai shadow-sm">
+            <div class="d-flex align-items-center gap-2">
+                <div class="spinner-border spinner-border-sm text-warning" role="status"></div>
+                <span class="text-warning fw-bold small">AI Legal Assistant — Reading and analyzing document...</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Auto-scroll
+    var chatContainer = document.getElementById("chatContainer");
+    function scrollChat() { if(chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight; }
+    scrollChat();
+
+    // ---- AJAX Document Upload ----
+    const docFileInput = document.getElementById('docFileInput');
+    docFileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        if (!file) return;
+
+        // Show loading bubbles in chat
+        document.getElementById('uploadingFileName').textContent = '📄 Analyzing: ' + file.name;
+        const loadU = document.getElementById('uploadLoadingBubble').cloneNode(true);
+        const loadA = document.getElementById('analysisLoadingBubble').cloneNode(true);
+        loadU.style.display = 'block'; loadU.id = '';
+        loadA.style.display = 'block'; loadA.id = '';
+        chatContainer.appendChild(loadU);
+        chatContainer.appendChild(loadA);
+        scrollChat();
+
+        // Disable upload button
+        document.getElementById('uploadLabelText').textContent = 'Analyzing...';
+        docFileInput.disabled = true;
+
+        // Send via fetch
+        const formData = new FormData();
+        formData.append('document', file);
+
+        fetch('/chatbot/upload', { method: 'POST', body: formData })
+            .then(res => res.json())
+            .then(data => {
+                if (data.reload || data.success) {
+                    window.location.reload();
+                } else {
+                    alert('Upload failed: ' + (data.error || 'Unknown error'));
+                    document.getElementById('uploadLabelText').textContent = 'Upload & Analyze';
+                    docFileInput.disabled = false;
+                }
+            })
+            .catch(err => {
+                console.error('Upload error:', err);
+                window.location.reload();
+            });
+    });
+
+    // Voice Input (Speech Recognition)
+    const micBtn = document.getElementById('micBtn');
+    const stopAudioBtn = document.getElementById('stopAudioBtn');
+    const chatInput = document.getElementById('chatInput');
+    const chatForm = document.getElementById('chatForm');
+    const voiceLang = document.getElementById('voiceLang');
+    
+    // Stop Audio Button Logic
+    stopAudioBtn.addEventListener('click', () => {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel(); // Stop playing audio immediately
+            stopAudioBtn.style.display = 'none'; // Hide stop button
+        }
+    });
+
+    // Chrome requires localhost instead of 127.0.0.1 for Microphone access
+    if (window.location.hostname === '127.0.0.1') {
+        micBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if(confirm("Microphone access requires 'localhost' instead of '127.0.0.1'. Redirect now?")) {
+                window.location.href = window.location.href.replace('127.0.0.1', 'localhost');
+            }
+        });
+    } else {
+        // Check for browser support (Chrome, Edge, Safari)
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        
+        if (SpeechRecognition) {
+            const recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false; // Simplified for better compatibility
+            
+            micBtn.addEventListener('click', () => {
+                try {
+                    // Stop any playing audio if user starts speaking
+                    if ('speechSynthesis' in window) {
+                        window.speechSynthesis.cancel();
+                        stopAudioBtn.style.display = 'none';
+                    }
+
+                    // Set language dynamically before starting
+                    recognition.lang = voiceLang.value;
+                    micBtn.classList.remove('btn-outline-warning');
+                    micBtn.classList.add('btn-danger');
+                    chatInput.placeholder = voiceLang.value === 'hi-IN' ? "सुन रहा हूँ..." : "Listening (Speak Now)...";
+                    recognition.start();
+                } catch (e) {
+                    console.error("Recognition already started or error:", e);
+                }
+            });
+            
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                if (transcript) {
+                    chatInput.value = transcript;
+                    chatForm.submit(); // Auto submit after speaking completes
+                }
+            };
+            
+            recognition.onspeechend = function() {
+                recognition.stop();
+            };
+            
+            recognition.onend = function() {
+                micBtn.classList.remove('btn-danger');
+                micBtn.classList.add('btn-outline-warning');
+                chatInput.placeholder = "Type or speak your legal inquiry here...";
+            };
+            
+            recognition.onerror = function(event) {
+                console.error("Speech Recognition Error:", event.error);
+                if (event.error === 'not-allowed') {
+                    alert("Microphone access blocked. Please click the Lock icon next to the URL and allow Microphone.");
+                } else if(event.error !== 'no-speech') {
+                    alert("Speech Error: " + event.error);
+                }
+                micBtn.classList.remove('btn-danger');
+                micBtn.classList.add('btn-outline-warning');
+                chatInput.placeholder = "Error hearing you. Try typing.";
+            };
+        } else {
+            micBtn.addEventListener('click', () => {
+                alert("Voice Assistant is not supported in this browser. Please use Google Chrome or Microsoft Edge.");
+            });
+            console.warn("Speech Recognition API not supported in this browser.");
+        }
+    }
+
+    // Voice Output (Speech Synthesis) for latest AI message
+    {% if session.chat_history and session.chat_history|length > 0 %}
+        {% set last_msg = session.chat_history[-1] %}
+        {% if last_msg.role == 'ai' %}
+            const msgContent = `{{ last_msg.content.answer if last_msg.content.answer else last_msg.content }}`.replace(/<[^>]*>?/gm, ''); // Strip HTML if any
+            
+            // Check session storage to prevent repeating on refresh
+            const lastPlayedMsg = sessionStorage.getItem("lastPlayedAiMsg");
+            
+            if ('speechSynthesis' in window && msgContent && !msgContent.includes("Uploaded document") && msgContent !== lastPlayedMsg) {
+                // Save to session storage so it doesn't repeat on refresh
+                sessionStorage.setItem("lastPlayedAiMsg", msgContent);
+                
+                const utterance = new SpeechSynthesisUtterance(msgContent);
+                // Attempt to detect if response is in Hindi
+                const isHindi = /[\u0900-\u097F]/.test(msgContent);
+                utterance.lang = isHindi ? 'hi-IN' : 'en-IN';
+                utterance.rate = 1.0;
+                
+                utterance.onstart = () => {
+                    stopAudioBtn.style.display = 'flex'; // Show stop button when playing
+                };
+                
+                utterance.onend = () => {
+                    stopAudioBtn.style.display = 'none'; // Hide stop button when done
+                };
+                
+                // Add a small delay to ensure page is fully loaded
+                setTimeout(() => {
+                    window.speechSynthesis.speak(utterance);
+                }, 500);
+            }
+        {% endif %}
+    {% endif %}
+</script>
+{% endblock %}
