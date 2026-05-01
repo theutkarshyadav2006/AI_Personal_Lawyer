@@ -101,26 +101,46 @@
     });
 
     socket.on('receive_message', (data) => {
+        console.log('Received message:', data);
         const isMine = data.sender_id === currentUserId;
         const senderName = isMine ? 'You' : (isClient ? 'Lawyer' : 'Client');
         const bubbleClass = isMine ? 'bg-primary justify-content-end' : 'bg-secondary justify-content-start';
         const wrapperClass = isMine ? 'justify-content-end' : 'justify-content-start';
         
-        const html = `
-            <div class="d-flex ${wrapperClass} mb-3">
-                <div class="${bubbleClass} text-white rounded p-3" style="max-width: 75%;">
-                    <p class="mb-1 small text-white-50">${senderName} - ${data.timestamp.split(' ')[1].substring(0,5)}</p>
-                    <p class="mb-0">${data.content}</p>
+        try {
+            const timeStr = data.timestamp.split(' ')[1].substring(0,5);
+            const html = `
+                <div class="d-flex ${wrapperClass} mb-3">
+                    <div class="${bubbleClass} text-white rounded p-3" style="max-width: 75%;">
+                        <p class="mb-1 small text-white-50">${senderName} - ${timeStr}</p>
+                        <p class="mb-0">${data.content}</p>
+                    </div>
                 </div>
-            </div>
-        `;
-        chatContainer.innerHTML += html;
-        scrollToBottom();
+            `;
+            chatContainer.innerHTML += html;
+            scrollToBottom();
+        } catch (e) {
+            console.error('Error rendering message:', e);
+        }
     });
 
     function sendMessage() {
         const content = messageInput.value.trim();
         if(content) {
+            // Add message locally for "on the spot" feedback
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+            const localHtml = `
+                <div class="d-flex justify-content-end mb-3 local-pending">
+                    <div class="bg-primary text-white rounded p-3" style="max-width: 75%; opacity: 0.7;">
+                        <p class="mb-1 small text-white-50">You - ${timeStr} (Sending...)</p>
+                        <p class="mb-0">${content}</p>
+                    </div>
+                </div>
+            `;
+            chatContainer.innerHTML += localHtml;
+            scrollToBottom();
+
             socket.emit('send_message', {
                 case_id: caseId,
                 sender_id: currentUserId,
