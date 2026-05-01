@@ -84,11 +84,12 @@ def handle_message(data):
         msg = Message(case_id=case_id, sender_id=sender_id, content=content)
         db.session.add(msg)
         db.session.commit()
+        timestamp_str = msg.timestamp.strftime('%Y-%m-%d %H:%M:%S')
 
     emit('receive_message', {
         'sender_id': sender_id,
         'content': content,
-        'timestamp': msg.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+        'timestamp': timestamp_str
     }, room=str(case_id))
 
 if __name__ == "__main__":
